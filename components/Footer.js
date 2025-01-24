@@ -18,10 +18,12 @@ export default function Footer() {
 }
 const styles = StyleSheet.create({
   footerDiv: {
-    flex: 1,
+    flex: 0.6,
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
+    borderTopWidth: 2,
+    borderColor: "lightgrey",
   },
 });
