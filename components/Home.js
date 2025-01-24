@@ -1,17 +1,11 @@
-import React, { useRef, useEffect, useState } from "react";
 import { StyleSheet, Text, View, FlatList, Dimensions } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import FontAwesome6 from "react-native-vector-icons/FontAwesome6";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
-import { AutoScrollFlatList } from "react-native-autoscroll-flatlist";
 export default function Home() {
   const { width } = Dimensions.get("screen");
 
-  const flatListRef = useRef(null);
-
   const Info = ["Praveen", "Sricharan", "Charan Raju", "Karthik"];
-
-  const [currentIndex, setCurrentIndex] = useState(0);
 
   const iconMap = {
     MaterialCommunityIcons: MaterialCommunityIcons,
@@ -61,17 +55,6 @@ export default function Home() {
       tag: "MaterialIcons",
     },
   ];
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (flatListRef.current) {
-        const nextIndex = (currentIndex + 1) % Info.length;
-        flatListRef.current.scrollToIndex({ index: nextIndex, animated: true });
-        setCurrentIndex(nextIndex);
-      }
-    }, 1000);
-    return () => clearInterval(interval);
-  }, [currentIndex]);
 
   return (
     <>
@@ -129,18 +112,12 @@ export default function Home() {
             horizontal
             showsHorizontalScrollIndicator={false}
             pagingEnabled
-            decelerationRate="fast"
-            keyExtractor={(item, index) => index.toString()}
-            onScrollToIndexFailed={(info) => {
-              setTimeout(() => {
-                flatListRef.current.scrollToIndex({
-                  index: info.index,
-                  animated: true,
-                });
-              }, 500);
-            }}
           />
         </View>
+        {/* <Text style={styles.h1text}>Latest Courses</Text>
+        <View
+          style={{ width: "100%", height: 50, backgroundColor: "black" }}
+        ></View> */}
       </View>
     </>
   );
@@ -149,6 +126,7 @@ const styles = StyleSheet.create({
   home: {
     flex: 8.8,
     padding: 15,
+    height: "auto",
   },
   h1text: {
     fontSize: 21,
