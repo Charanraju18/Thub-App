@@ -1,15 +1,24 @@
+import React, { useRef, useEffect, useState } from "react";
 import { StyleSheet, Text, View, FlatList, Dimensions } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import FontAwesome6 from "react-native-vector-icons/FontAwesome6";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import { AutoScrollFlatList } from "react-native-autoscroll-flatlist";
 export default function Home() {
-  const { width, height } = Dimensions.get("screen");
+  const { width } = Dimensions.get("screen");
+
+  const flatListRef = useRef(null);
+
   const Info = ["Praveen", "Sricharan", "Charan Raju", "Karthik"];
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+
   const iconMap = {
     MaterialCommunityIcons: MaterialCommunityIcons,
     FontAwesome6: FontAwesome6,
     MaterialIcons: MaterialIcons,
   };
+
   const Categories = [
     {
       name: "Programs",
@@ -52,6 +61,18 @@ export default function Home() {
       tag: "MaterialIcons",
     },
   ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (flatListRef.current) {
+        const nextIndex = (currentIndex + 1) % Info.length;
+        flatListRef.current.scrollToIndex({ index: nextIndex, animated: true });
+        setCurrentIndex(nextIndex);
+      }
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [currentIndex]);
+
   return (
     <>
       <View style={styles.home}>
@@ -78,19 +99,46 @@ export default function Home() {
           })}
         </View>
         <Text style={styles.h1text}>Digi Wall</Text>
-        <View>
+        <View style={styles.carouselContainer}>
           <FlatList
             data={Info}
             renderItem={({ item }) => (
-              <>
-                <View style={{ width: "100%" }}>
-                  <Text>{item}</Text>
+              <View
+                style={{
+                  width: width,
+                  height: 200,
+                  justifyContent: "flex-start",
+                  alignItems: "center",
+                  marginTop: 20,
+                }}
+              >
+                <View
+                  style={{
+                    width: "90%",
+                    height: "100%",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    backgroundColor: "green",
+                    borderRadius: 15,
+                  }}
+                >
+                  <Text style={{ color: "white", fontSize: 50 }}>{item}</Text>
                 </View>
-              </>
+              </View>
             )}
             horizontal
             showsHorizontalScrollIndicator={false}
             pagingEnabled
+            decelerationRate="fast"
+            keyExtractor={(item, index) => index.toString()}
+            onScrollToIndexFailed={(info) => {
+              setTimeout(() => {
+                flatListRef.current.scrollToIndex({
+                  index: info.index,
+                  animated: true,
+                });
+              }, 500);
+            }}
           />
         </View>
       </View>
@@ -138,12 +186,7 @@ const styles = StyleSheet.create({
   p1: {
     fontSize: 14,
   },
-  banner2: {
-    width: "100%",
-    marginTop: 25,
-    marginBottom: 20,
-    height: 200,
-    borderRadius: 15,
-    backgroundColor: "green",
+  carouselContainer: {
+    marginHorizontal: -15,
   },
 });
