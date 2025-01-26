@@ -1,23 +1,14 @@
-import Header from "./components/Header";
-import Footer from "./components/Footer";
+import React from "react";
+import { SafeAreaView, StyleSheet } from "react-native";
 import Content from "./components/Content";
-import { StyleSheet, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+
 export default function App() {
-  return (
-    <>
-      <SafeAreaView>
-        <View style={styles.container}>
-          <Header />
-          <Content />
-          <Footer />
-        </View>
-      </SafeAreaView>
-    </>
-  );
+  return <Content />;
 }
+
 const styles = StyleSheet.create({
   container: {
-    height: "100%",
+    flex: 1,
+    backgroundColor: "white",
   },
 });

@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 import Foundation from "react-native-vector-icons/Foundation";
 import EvilIcons from "react-native-vector-icons/EvilIcons";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
@@ -8,22 +8,39 @@ export default function Footer() {
   return (
     <>
       <View style={styles.footerDiv}>
-        <Foundation name="home" color="green" size={35} />
-        <EvilIcons name="calendar" color="green" size={40} />
-        <FontAwesome5 name="door-open" color="green" size={30} />
-        <FontAwesome6 name="user" color="green" size={30} />
+        <View style={styles.iconsDiv}>
+          <Foundation name="home" color="green" size={30} />
+          <Text style={{ fontSize: 12 }}>Home</Text>
+        </View>
+        <View style={styles.iconsDiv}>
+          <EvilIcons name="calendar" color="green" size={35} />
+          <Text style={{ fontSize: 12 }}>Events</Text>
+        </View>
+        <View style={styles.iconsDiv}>
+          <FontAwesome5 name="door-open" color="green" size={25} />
+          <Text style={{ fontSize: 12 }}>Join</Text>
+        </View>
+        <View style={styles.iconsDiv}>
+          <FontAwesome6 name="user" color="green" size={25} />
+          <Text style={{ fontSize: 12 }}>Profile</Text>
+        </View>
       </View>
     </>
   );
 }
 const styles = StyleSheet.create({
   footerDiv: {
-    flex: 0.6,
+    height: 60,
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
     borderTopWidth: 2,
     borderColor: "lightgrey",
+  },
+  iconsDiv: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
   },
 });
