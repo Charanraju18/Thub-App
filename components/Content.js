@@ -4,13 +4,17 @@ import { SafeAreaView } from "react-native-safe-area-context"; // Updated import
 import Header from "./Header";
 import Home from "./Home";
 import Footer from "./Footer";
+import Events from "./Events";
+import Join from "./Join";
 
 export default function Content() {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
-        <Header />
-        <Home />
+        {/* <Header /> */}
+        {/* <Home /> */}
+        {/* <Events /> */}
+        <Join />
       </ScrollView>
       <Footer />
     </SafeAreaView>
