@@ -6,15 +6,17 @@ import Home from "./Home";
 import Footer from "./Footer";
 import Events from "./Events";
 import Join from "./Join";
+import Profile from "./Profile";
 
 export default function Content() {
   return (
     <SafeAreaView style={styles.container}>
+      {/* <Header /> */}
       <ScrollView>
-        {/* <Header /> */}
         {/* <Home /> */}
         {/* <Events /> */}
-        <Join />
+        {/* <Join /> */}
+        <Profile />
       </ScrollView>
       <Footer />
     </SafeAreaView>
